@@ -11,6 +11,7 @@ public class PerformanceDemo {
     for (int i = 0; i < 100000; i++){
       al.add(0, i);
 //      al.add(i);
+
     }
     long end = System.nanoTime();
     long duration = end - start;
