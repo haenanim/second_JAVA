@@ -1,37 +1,23 @@
 package Chapter18;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBDemo5 {
   public static void main(String[] args) throws SQLException {
     Connection conn = makeConnection();
 //    Statement statement = conn.createStatement();
 //    String sql = "insert into person (name, phone, email) values(" + "'김연아', '012', 'kya@naver.com');";
-    String sql = "insert into person (name, phone, email) values(?, ?, ?);";
+    String sql = "select * from person;";
     PreparedStatement preparedStatement = conn.prepareStatement(sql);
-    preparedStatement.setString(1,"김연아");
-    preparedStatement.setString(2,"015");
-    preparedStatement.setString(3,"kya1@gmail.com");
-    int i = preparedStatement.executeUpdate();
-    if (i == 1) {
-      System.out.println("데이터 추가 성공");
-    } else {
-      System.out.println("데이터 추가 실패");
+    ResultSet rs = preparedStatement.executeQuery();
+    while(rs.next()){
+      System.out.println("name :" + rs.getString(1));
+      System.out.println("phone :" + rs.getString(2));
+      System.out.println("email :" + rs.getString(3));
     }
 
-
-    String sql1 = "update person set email = ? where phone = ?;";
-    PreparedStatement preparedStatement1 = conn.prepareStatement(sql1);
-    preparedStatement1.setString(1, "hkd@naver.com");
-    preparedStatement1.setString(2, "014");
-
-    System.out.println(preparedStatement1.execute());
-
-
     conn.close();
+    rs.close();
 
   }
 
