@@ -11,6 +11,7 @@ public class InetAddressDemo {
     Scanner in = new Scanner(System.in);
     String url = in.nextLine();
 
+
     try {
       addr1 = InetAddress.getByName(url);
       addr2 = InetAddress.getLocalHost();
